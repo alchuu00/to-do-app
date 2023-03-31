@@ -1,0 +1,72 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+#root {
+  @apply h-screen flex flex-col justify-between;
+}
+
+/*HEADER*/
+.header {
+  @apply flex justify-start items-center bg-zinc-700 text-white gap-3 text-5xl font-bold px-7 h-1/6;
+}
+
+/*APP*/
+.material-icons-outlined {
+  @apply text-5xl font-bold;
+}
+.main-container {
+  @apply flex w-screen bg-white h-full;
+}
+
+/*SIDEBAR*/
+.sidebar {
+  @apply flex flex-col p-5 text-lg bg-zinc-200 w-1/6;
+}
+.sidebar-item {
+  @apply flex justify-start items-center text-center gap-3 p-2 rounded-xl;
+}
+.sidebar-item:hover {
+  @apply bg-zinc-300 cursor-pointer;
+}
+.sidebar-title {
+  @apply mt-10 font-bold text-xl;
+}
+
+/*DYNAMIC CONTENT SECTION*/
+.content {
+  @apply flex flex-col w-4/6 p-10 mx-52;
+}
+/*TASK SECTION*/
+.task-container {
+  @apply flex w-full p-2 rounded-xl;
+}
+.task-title {
+  @apply font-bold text-3xl mb-5;
+}
+.task-add {
+  @apply flex gap-3;
+}
+.task-inner {
+  @apply flex gap-3 w-full justify-between items-center;
+}
+.task-form{
+  @apply w-full;
+}
+.task-form-btns {
+  @apply flex justify-around gap-3 mt-3;
+}
+.task-add-btn {
+  @apply w-1/2 bg-green-100;
+}
+.task-cancel-btn {
+  @apply w-1/2 bg-red-100;
+}
+
+/*FOOTER*/
+.footer {
+  @apply flex justify-center items-center bg-zinc-700 text-white gap-3 p-7 h-10;
+}
+svg:hover {
+  @apply animate-spin;
+}
