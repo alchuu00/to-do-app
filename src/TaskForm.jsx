@@ -29,7 +29,7 @@ function TaskForm({ taskList, setTaskList, setShowTaskForm }) {
   return (
     <form className="task-form" onSubmit={handleFormSubmit}>
       <input
-        autoComplete="false"
+        autoComplete="off"
         type="text"
         name="taskInput"
         placeholder="Type your task..."
@@ -39,7 +39,7 @@ function TaskForm({ taskList, setTaskList, setShowTaskForm }) {
       />
       <div className="task-form-btns">
         <button type="submit" className="task-add-btn">
-          Add Task
+          Add
         </button>
         <button onClick={handleCancelTaskClick} className="task-cancel-btn">
           Cancel

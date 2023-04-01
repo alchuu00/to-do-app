@@ -2,10 +2,14 @@ import { useState, useEffect } from "react";
 import Footer from "./Footer";
 import TaskForm from "./TaskForm";
 import DisplayTasks from "./displayTasks";
+import CategoryForm from "./CategoryForm";
+import DisplayCategories from "./DisplayCategories";
 
 function App() {
   const [showTaskForm, setShowTaskForm] = useState(false);
+  const [showCategoryForm, setShowCategoryForm] = useState(false);
   const [taskList, setTaskList] = useState([]);
+  const [categoryList, setCategoryList] = useState([]);
   const [selectedFilter, setSelectedFilter] = useState("All");
 
   const handleAddTaskClick = (event) => {
@@ -14,8 +18,20 @@ function App() {
     setShowTaskForm(true);
   };
 
+  const handleAddCategoryClick = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    setShowCategoryForm(true);
+  };
+
   const handleDeleteTask = (index) => {
     setTaskList((taskList) => taskList.filter((task, i) => i !== index));
+  };
+
+  const handleDeleteCategory = (index) => {
+    setCategoryList((categoryList) =>
+      categoryList.filter((category, i) => i !== index)
+    );
   };
 
   useEffect(() => {
@@ -32,6 +48,21 @@ function App() {
       localStorage.removeItem("tasks");
     }
   }, [taskList]);
+
+  useEffect(() => {
+    const storedCategories = JSON.parse(localStorage.getItem("categories"));
+    if (storedCategories) {
+      setCategoryList(storedCategories);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (categoryList.length > 0) {
+      localStorage.setItem("categories", JSON.stringify(categoryList));
+    } else {
+      localStorage.removeItem("categories");
+    }
+  }, [categoryList]);
 
   function onUpdateTaskCompletion(index) {
     setTaskList((prevTaskList) => {
@@ -83,10 +114,23 @@ function App() {
           </div>
 
           <h1 className="sidebar-title">Lists</h1>
-          <div className="sidebar-item">
-            <span className="material-symbols-outlined">add</span>
-            <span>Add List</span>
-          </div>
+          {!showCategoryForm && (
+            <div className="sidebar-item" onClick={handleAddCategoryClick}>
+              <span className="material-symbols-outlined">add</span>
+              <span>Add List</span>
+            </div>
+          )}
+          {showCategoryForm && (
+            <CategoryForm
+              categoryList={categoryList}
+              setCategoryList={setCategoryList}
+              setShowCategoryForm={setShowCategoryForm}
+            />
+          )}
+          <DisplayCategories
+            categoryList={categoryList}
+            onDeleteCategory={handleDeleteCategory}
+          />
         </div>
         <div className="content">
           <h1 className="task-title">{selectedFilter}</h1>
