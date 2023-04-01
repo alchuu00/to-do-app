@@ -6,6 +6,7 @@ import DisplayTasks from "./displayTasks";
 function App() {
   const [showTaskForm, setShowTaskForm] = useState(false);
   const [taskList, setTaskList] = useState([]);
+  const [selectedFilter, setSelectedFilter] = useState("All");
 
   const handleAddTaskClick = (event) => {
     event.preventDefault();
@@ -18,7 +19,7 @@ function App() {
   };
 
   useEffect(() => {
-    const storedTasks = JSON.parse(localStorage.getItem('tasks'));
+    const storedTasks = JSON.parse(localStorage.getItem("tasks"));
     if (storedTasks) {
       setTaskList(storedTasks);
     }
@@ -26,9 +27,9 @@ function App() {
 
   useEffect(() => {
     if (taskList.length > 0) {
-      localStorage.setItem('tasks', JSON.stringify(taskList));
+      localStorage.setItem("tasks", JSON.stringify(taskList));
     } else {
-      localStorage.removeItem('tasks');
+      localStorage.removeItem("tasks");
     }
   }, [taskList]);
 
@@ -37,20 +38,19 @@ function App() {
       const updatedTaskList = [...prevTaskList];
       updatedTaskList[index] = {
         ...updatedTaskList[index],
-        completed: !updatedTaskList[index].completed
+        completed: !updatedTaskList[index].completed,
       };
       return updatedTaskList;
     });
   }
-  
+
   function onUpdateTaskDate(index, newDate) {
-    setTaskList(prevList => {
+    setTaskList((prevList) => {
       const updatedList = [...prevList];
       updatedList[index].date = newDate;
       return updatedList;
     });
   }
-  
 
   return (
     <>
@@ -60,18 +60,28 @@ function App() {
       </header>
       <div className="main-container">
         <div className="sidebar">
-          <div className="sidebar-item">
+          <div
+            className="sidebar-item"
+            onClick={() => setSelectedFilter("All")}
+          >
             <span className="material-symbols-outlined">ballot</span>
             <span>All</span>
           </div>
-          <div className="sidebar-item">
+          <div
+            className="sidebar-item"
+            onClick={() => setSelectedFilter("Today")}
+          >
             <span className="material-symbols-outlined">today</span>
             <span>Today</span>
           </div>
-          <div className="sidebar-item">
+          <div
+            className="sidebar-item"
+            onClick={() => setSelectedFilter("This Week")}
+          >
             <span className="material-symbols-outlined">date_range</span>
             <span>This week</span>
           </div>
+
           <h1 className="sidebar-title">Lists</h1>
           <div className="sidebar-item">
             <span className="material-symbols-outlined">add</span>
@@ -79,8 +89,14 @@ function App() {
           </div>
         </div>
         <div className="content">
-          <h1 className="task-title">All</h1>
-          <DisplayTasks taskList={taskList} onDeleteTask={handleDeleteTask} onUpdateTaskCompletion={onUpdateTaskCompletion} onUpdateTaskDate={onUpdateTaskDate}/>
+          <h1 className="task-title">{selectedFilter}</h1>
+          <DisplayTasks
+            taskList={taskList}
+            onDeleteTask={handleDeleteTask}
+            onUpdateTaskCompletion={onUpdateTaskCompletion}
+            onUpdateTaskDate={onUpdateTaskDate}
+            selectedFilter={selectedFilter}
+          />
           <div className="task-container">
             {!showTaskForm && (
               <div className="task-add" onClick={handleAddTaskClick}>
