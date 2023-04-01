@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Footer from "./Footer";
 import TaskForm from "./TaskForm";
 import DisplayTasks from "./displayTasks";
@@ -14,8 +14,23 @@ function App() {
   };
 
   const handleDeleteTask = (index) => {
-    setTaskList(taskList.filter((task, i) => i !== index));
+    setTaskList((taskList) => taskList.filter((task, i) => i !== index));
   };
+
+  useEffect(() => {
+    const storedTasks = JSON.parse(localStorage.getItem('tasks'));
+    if (storedTasks) {
+      setTaskList(storedTasks);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (taskList.length > 0) {
+      localStorage.setItem('tasks', JSON.stringify(taskList));
+    } else {
+      localStorage.removeItem('tasks');
+    }
+  }, [taskList]);
 
   return (
     <>
@@ -45,8 +60,8 @@ function App() {
         </div>
         <div className="content">
           <h1 className="task-title">All</h1>
-            <DisplayTasks taskList={taskList} onDeleteTask={handleDeleteTask}/>
-            <div className="task-container">
+          <DisplayTasks taskList={taskList} onDeleteTask={handleDeleteTask} />
+          <div className="task-container">
             {!showTaskForm && (
               <div className="task-add" onClick={handleAddTaskClick}>
                 <div>+</div>
@@ -54,11 +69,11 @@ function App() {
               </div>
             )}
             {showTaskForm && (
-                <TaskForm
-                  taskList={taskList}
-                  setTaskList={setTaskList}
-                  setShowTaskForm={setShowTaskForm}
-                />
+              <TaskForm
+                taskList={taskList}
+                setTaskList={setTaskList}
+                setShowTaskForm={setShowTaskForm}
+              />
             )}
           </div>
         </div>

@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
-function TaskForm({ setTaskList, setShowTaskForm }) {
+function TaskForm({ taskList, setTaskList, setShowTaskForm }) {
   const [taskInputValue, setTaskInputValue] = useState("");
 
   const handleCancelTaskClick = () => {
@@ -17,8 +17,6 @@ function TaskForm({ setTaskList, setShowTaskForm }) {
       setShowTaskForm(false);
     }
   };
-
-  console.log(taskInputValue);
 
   return (
     <form className="task-form" onSubmit={handleFormSubmit}>

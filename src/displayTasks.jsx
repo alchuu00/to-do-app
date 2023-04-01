@@ -6,14 +6,18 @@ function DisplayTasks({ taskList, onDeleteTask }) {
   };
   return (
     <>
-      {taskList.map((task, index) => (
-        <div className="task-container">
-          <div key={index} className="task-inner">
-            <span>{task}</span>
-            <span onClick={() => handleDeleteTaskClick(index)}>x</span>
+      {taskList.length === 0 ? (
+        <p>No tasks to show</p>
+      ) : (
+        taskList.map((task, index) => (
+          <div className="task-container" key={index}>
+            <div className="task-inner">
+              <span>{task}</span>
+              <span onClick={() => onDeleteTask(index)}>x</span>
+            </div>
           </div>
-        </div>
-      ))}
+        ))
+      )}
     </>
   );
 }
