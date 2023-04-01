@@ -1,19 +1,27 @@
 import React, { useState, useEffect } from "react";
 
 function TaskForm({ taskList, setTaskList, setShowTaskForm }) {
-  const [taskInputValue, setTaskInputValue] = useState("");
+  const [taskName, setTaskName] = useState("");
+  const [taskDate, setTaskDate] = useState("");
 
   const handleCancelTaskClick = () => {
     setShowTaskForm(false);
   };
 
   const handleFormSubmit = (event) => {
-    console.log("task submitted");
     event.preventDefault();
     event.stopPropagation();
-    if (taskInputValue.trim() !== "") {
-      setTaskList((taskList) => [...taskList, taskInputValue.trim()]);
-      setTaskInputValue("");
+    if (taskName.trim() !== "") {
+      setTaskList((taskList) => [
+        ...taskList,
+        {
+          completed: false,
+          name: taskName.trim(),
+          date: taskDate.trim(),
+        },
+      ]);
+      setTaskName("");
+      setTaskDate("");
       setShowTaskForm(false);
     }
   };
@@ -26,8 +34,8 @@ function TaskForm({ taskList, setTaskList, setShowTaskForm }) {
         name="taskInput"
         placeholder="Type your task..."
         className="task-form"
-        value={taskInputValue}
-        onChange={(event) => setTaskInputValue(event.target.value)}
+        value={taskName}
+        onChange={(event) => setTaskName(event.target.value)}
       />
       <div className="task-form-btns">
         <button type="submit" className="task-add-btn">

@@ -32,6 +32,18 @@ function App() {
     }
   }, [taskList]);
 
+  function onUpdateTaskCompletion(index) {
+    setTaskList((prevTaskList) => {
+      const updatedTaskList = [...prevTaskList];
+      updatedTaskList[index] = {
+        ...updatedTaskList[index],
+        completed: !updatedTaskList[index].completed
+      };
+      return updatedTaskList;
+    });
+  }
+  
+
   return (
     <>
       <header className="header">
@@ -52,15 +64,15 @@ function App() {
             <span className="material-symbols-outlined">date_range</span>
             <span>This week</span>
           </div>
-          <h1 className="sidebar-title">Projects</h1>
+          <h1 className="sidebar-title">Lists</h1>
           <div className="sidebar-item">
             <span className="material-symbols-outlined">add</span>
-            <span>Add Project</span>
+            <span>Add List</span>
           </div>
         </div>
         <div className="content">
           <h1 className="task-title">All</h1>
-          <DisplayTasks taskList={taskList} onDeleteTask={handleDeleteTask} />
+          <DisplayTasks taskList={taskList} onDeleteTask={handleDeleteTask} onUpdateTaskCompletion={onUpdateTaskCompletion}/>
           <div className="task-container">
             {!showTaskForm && (
               <div className="task-add" onClick={handleAddTaskClick}>
