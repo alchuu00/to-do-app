@@ -43,6 +43,14 @@ function App() {
     });
   }
   
+  function onUpdateTaskDate(index, newDate) {
+    setTaskList(prevList => {
+      const updatedList = [...prevList];
+      updatedList[index].date = newDate;
+      return updatedList;
+    });
+  }
+  
 
   return (
     <>
@@ -72,7 +80,7 @@ function App() {
         </div>
         <div className="content">
           <h1 className="task-title">All</h1>
-          <DisplayTasks taskList={taskList} onDeleteTask={handleDeleteTask} onUpdateTaskCompletion={onUpdateTaskCompletion}/>
+          <DisplayTasks taskList={taskList} onDeleteTask={handleDeleteTask} onUpdateTaskCompletion={onUpdateTaskCompletion} onUpdateTaskDate={onUpdateTaskDate}/>
           <div className="task-container">
             {!showTaskForm && (
               <div className="task-add" onClick={handleAddTaskClick}>

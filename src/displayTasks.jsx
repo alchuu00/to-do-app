@@ -1,6 +1,6 @@
 import React from "react";
 
-function DisplayTasks({ taskList, onDeleteTask, onUpdateTaskDate, onUpdateTaskCompletion }) {
+function DisplayTasks({ taskList, onDeleteTask, onUpdateTaskCompletion, onUpdateTaskDate}) {
   const handleDeleteTaskClick = (index) => {
     onDeleteTask(index);
   };
