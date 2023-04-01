@@ -10,8 +10,15 @@ function DisplayTasks({ taskList, onDeleteTask, onUpdateTaskCompletion, onUpdate
   };
 
   const handleTaskCompletionToggle = (index) => {
-    onUpdateTaskCompletion(index);
+    const taskDate = new Date(taskList[index].date).toDateString();
+    const todayDate = new Date().toDateString();
+    if (taskDate === todayDate) {
+      onUpdateTaskCompletion(index);
+    } else {
+      alert("You cannot update task completion for a date other than today!");
+    }
   };
+  
 
   return (
     <>
