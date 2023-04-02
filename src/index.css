@@ -18,6 +18,9 @@
 .main-container {
   @apply flex w-screen bg-white h-full;
 }
+.content {
+  @apply flex flex-col w-4/6 p-10 mx-52;
+}
 
 /*SIDEBAR*/
 .sidebar {
@@ -39,10 +42,6 @@
   @apply bg-zinc-300 cursor-pointer;
 }
 
-/*CONTENT SECTION*/
-.content {
-  @apply flex flex-col w-4/6 p-10 mx-52;
-}
 /*TASK SECTION*/
 .task-container {
   @apply flex w-full p-2 rounded-xl;
@@ -59,7 +58,7 @@ span {
 .task-inner {
   @apply flex gap-3 w-full justify-between items-center;
 }
-.clickable:hover {
+.clickable:hover  {
   @apply cursor-pointer font-bold;
 }
 .task-form{

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-function TaskForm({ taskList, setTaskList, setShowTaskForm }) {
+function TaskForm({ taskList, setTaskList, setShowTaskForm, selectedCategory }) {
   const [taskName, setTaskName] = useState("");
   const [taskDate, setTaskDate] = useState("");
 
@@ -18,6 +18,7 @@ function TaskForm({ taskList, setTaskList, setShowTaskForm }) {
           completed: false,
           name: taskName.trim(),
           date: taskDate.trim(),
+          category: selectedCategory
         },
       ]);
       setTaskName("");

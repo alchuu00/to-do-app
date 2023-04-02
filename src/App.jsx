@@ -11,6 +11,7 @@ function App() {
   const [taskList, setTaskList] = useState([]);
   const [categoryList, setCategoryList] = useState([]);
   const [selectedFilter, setSelectedFilter] = useState("All");
+  const [selectedCategory, setSelectedCategory] = useState("");
 
   const handleAddTaskClick = (event) => {
     event.preventDefault();
@@ -26,6 +27,14 @@ function App() {
 
   const handleDeleteTask = (index) => {
     setTaskList((taskList) => taskList.filter((task, i) => i !== index));
+  };
+
+  const handleAddCategory = (category) => {
+    setCategoryList([...categoryList, category]);
+  };
+
+  const handleFilterByCategory = (category) => {
+    setSelectedCategory(category);
   };
 
   const handleDeleteCategory = (index) => {
@@ -83,6 +92,11 @@ function App() {
     });
   }
 
+  function onFilterByCategory(categoryName) {
+    setSelectedFilter(categoryName);
+  }
+  
+
   return (
     <>
       <header className="header">
@@ -117,6 +131,8 @@ function App() {
           <DisplayCategories
             categoryList={categoryList}
             onDeleteCategory={handleDeleteCategory}
+            onFilterByCategory={onFilterByCategory}
+            setSelectedCategory={setSelectedCategory}
           />
           {!showCategoryForm && (
             <div className="sidebar-item" onClick={handleAddCategoryClick}>
@@ -136,6 +152,7 @@ function App() {
           <h1 className="task-title">{selectedFilter}</h1>
           <DisplayTasks
             taskList={taskList}
+            categoryList={categoryList}
             onDeleteTask={handleDeleteTask}
             onUpdateTaskCompletion={onUpdateTaskCompletion}
             onUpdateTaskDate={onUpdateTaskDate}
@@ -153,6 +170,7 @@ function App() {
                 taskList={taskList}
                 setTaskList={setTaskList}
                 setShowTaskForm={setShowTaskForm}
+                selectedCategory={selectedCategory}
               />
             )}
           </div>

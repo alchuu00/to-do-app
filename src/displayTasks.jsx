@@ -2,11 +2,13 @@ import React from "react";
 
 function DisplayTasks({
   taskList,
+  categoryList,
   onDeleteTask,
   onUpdateTaskCompletion,
   onUpdateTaskDate,
   selectedFilter,
 }) {
+
   const handleDeleteTaskClick = (index) => {
     onDeleteTask(index);
   };
@@ -24,6 +26,8 @@ function DisplayTasks({
       alert("You cannot update task completion for a date other than today!");
     }
   };
+
+  console.log(selectedFilter)
 
   let filteredTasks = taskList;
   if (selectedFilter === "Today") {
@@ -43,7 +47,11 @@ function DisplayTasks({
         task.date >= startOfWeek.toISOString().slice(0, 10) &&
         task.date <= endOfWeek.toISOString().slice(0, 10)
     );
-  }
+  } else if (categoryList.includes(selectedFilter)) {
+    filteredTasks = filteredTasks.filter(
+      (task) => task.category === selectedFilter
+    );
+  }  
 
   return (
     <>
