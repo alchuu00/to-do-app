@@ -114,6 +114,10 @@ function App() {
           </div>
 
           <h1 className="sidebar-title">Lists</h1>
+          <DisplayCategories
+            categoryList={categoryList}
+            onDeleteCategory={handleDeleteCategory}
+          />
           {!showCategoryForm && (
             <div className="sidebar-item" onClick={handleAddCategoryClick}>
               <span className="material-symbols-outlined">add</span>
@@ -127,10 +131,6 @@ function App() {
               setShowCategoryForm={setShowCategoryForm}
             />
           )}
-          <DisplayCategories
-            categoryList={categoryList}
-            onDeleteCategory={handleDeleteCategory}
-          />
         </div>
         <div className="content">
           <h1 className="task-title">{selectedFilter}</h1>
@@ -143,7 +143,7 @@ function App() {
           />
           <div className="task-container">
             {!showTaskForm && (
-              <div className="task-add" onClick={handleAddTaskClick}>
+              <div className="task-add clickable" onClick={handleAddTaskClick}>
                 <div>+</div>
                 <div>Add Task</div>
               </div>

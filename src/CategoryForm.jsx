@@ -23,7 +23,7 @@ function CategoryForm({categoryList, setCategoryList, setShowCategoryForm}) {
         autoComplete="off"
         type="text"
         name="categoryInput"
-        placeholder="Category name..."
+        placeholder="List name..."
         className="task-form"
         value={categoryName}
         onChange={(event) => setCategoryName(event.target.value)}

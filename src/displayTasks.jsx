@@ -55,7 +55,7 @@ function DisplayTasks({
             <div className="task-inner">
               <div className="task-add">
                 <span
-                  className="material-symbols-outlined"
+                  className="material-symbols-outlined clickable"
                   onClick={() => handleTaskCompletionToggle(index)}
                 >
                   {task.completed ? "task_alt" : "radio_button_unchecked"}
@@ -64,12 +64,15 @@ function DisplayTasks({
               </div>
               <div className="task-add">
                 <input
+                className="clickable"
                   type="date"
                   name="date"
                   value={task.date}
                   onChange={(event) => handleDateChange(index, event)}
                 />
-                <span onClick={() => handleDeleteTaskClick(index)}>x</span>
+                <span onClick={() => handleDeleteTaskClick(index)}>
+                  <span className="material-symbols-outlined clickable">delete</span>
+                </span>
               </div>
             </div>
           </div>

@@ -32,8 +32,14 @@
 .sidebar-title {
   @apply mt-10 font-bold text-xl;
 }
+.sidebar-category {
+  @apply flex justify-between items-center text-center gap-3 rounded-xl pr-2;
+}
+.sidebar-category:hover {
+  @apply bg-zinc-300 cursor-pointer;
+}
 
-/*DYNAMIC CONTENT SECTION*/
+/*CONTENT SECTION*/
 .content {
   @apply flex flex-col w-4/6 p-10 mx-52;
 }
@@ -45,10 +51,16 @@
   @apply font-bold text-3xl mb-5;
 }
 .task-add {
-  @apply flex gap-3;
+  @apply flex justify-between items-center gap-3;
+}
+span {
+  @apply flex justify-between items-center;
 }
 .task-inner {
   @apply flex gap-3 w-full justify-between items-center;
+}
+.clickable:hover {
+  @apply cursor-pointer font-bold;
 }
 .task-form{
   @apply w-full;
