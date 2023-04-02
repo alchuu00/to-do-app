@@ -12,15 +12,13 @@ function TaskForm({ taskList, setTaskList, setShowTaskForm, selectedCategory }) 
     event.preventDefault();
     event.stopPropagation();
     if (taskName.trim() !== "") {
-      setTaskList((taskList) => [
-        ...taskList,
-        {
-          completed: false,
-          name: taskName.trim(),
-          date: taskDate.trim(),
-          category: selectedCategory
-        },
-      ]);
+      const newTask = {
+        completed: false,
+        name: taskName.trim(),
+        date: taskDate.trim(),
+        category: selectedCategory || "",
+      };
+      setTaskList((taskList) => [...taskList, newTask]);
       setTaskName("");
       setTaskDate("");
       setShowTaskForm(false);
