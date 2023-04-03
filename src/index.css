@@ -49,14 +49,20 @@
 .task-title {
   @apply font-bold text-3xl mb-5;
 }
+.task-date-delete {
+  @apply flex justify-end items-center gap-3;
+}
 .task-add {
-  @apply flex justify-between items-center gap-3;
+  @apply flex justify-between items-center gap-3 w-full;
+}
+.task-input {
+  @apply flex w-full gap-3;
 }
 span, a {
   @apply flex justify-between items-center gap-3;
 }
 .task-inner {
-  @apply flex gap-3 w-full justify-between items-center;
+  @apply flex w-full justify-between items-center;
 }
 .clickable:hover  {
   @apply cursor-pointer font-bold;

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Footer from "./Footer";
 import TaskForm from "./TaskForm";
-import DisplayTasks from "./displayTasks";
+import DisplayTasks from "./DisplayTasks";
 import CategoryForm from "./CategoryForm";
 import DisplayCategories from "./DisplayCategories";
 
@@ -84,6 +84,14 @@ function App() {
     });
   }
 
+  function onUpdateTaskName(index, newName) {
+    setTaskList((prevList) => {
+      const updatedList = [...prevList];
+      updatedList[index].name = newName;
+      return updatedList;
+    });
+  }  
+
   function onUpdateTaskDate(index, newDate) {
     setTaskList((prevList) => {
       const updatedList = [...prevList];
@@ -95,7 +103,6 @@ function App() {
   function onFilterByCategory(categoryName) {
     setSelectedFilter(categoryName);
   }
-  
 
   return (
     <>
@@ -156,11 +163,12 @@ function App() {
             onDeleteTask={handleDeleteTask}
             onUpdateTaskCompletion={onUpdateTaskCompletion}
             onUpdateTaskDate={onUpdateTaskDate}
+            onUpdateTaskName={onUpdateTaskName}
             selectedFilter={selectedFilter}
           />
           <div className="task-container">
             {!showTaskForm && (
-              <div className="task-add clickable" onClick={handleAddTaskClick}>
+              <div className="task-input clickable" onClick={handleAddTaskClick}>
                 <div>+</div>
                 <div>Add Task</div>
               </div>

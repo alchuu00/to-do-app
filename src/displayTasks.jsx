@@ -6,9 +6,9 @@ function DisplayTasks({
   onDeleteTask,
   onUpdateTaskCompletion,
   onUpdateTaskDate,
+  onUpdateTaskName,
   selectedFilter,
 }) {
-
   const handleDeleteTaskClick = (index) => {
     onDeleteTask(index);
   };
@@ -27,7 +27,11 @@ function DisplayTasks({
     }
   };
 
-  console.log(selectedFilter)
+  const handleTaskNameChange = (index, newName) => {
+    onUpdateTaskName(index, newName);
+  };
+
+  console.log(selectedFilter);
 
   let filteredTasks = taskList;
   if (selectedFilter === "Today") {
@@ -51,7 +55,7 @@ function DisplayTasks({
     filteredTasks = filteredTasks.filter(
       (task) => task.category === selectedFilter
     );
-  }  
+  }
 
   return (
     <>
@@ -68,18 +72,28 @@ function DisplayTasks({
                 >
                   {task.completed ? "task_alt" : "radio_button_unchecked"}
                 </span>
-                <span>{task.name}</span>
-              </div>
-              <div className="task-add">
                 <input
-                className="clickable"
+                className="task-input"
+                  type="text"
+                  name="taskName"
+                  value={task.name}
+                  onChange={(event) =>
+                    handleTaskNameChange(index, event.target.value)
+                  }
+                />
+              </div>
+              <div className="task-date-delete">
+                <input
+                  className="clickable"
                   type="date"
                   name="date"
                   value={task.date}
                   onChange={(event) => handleDateChange(index, event)}
                 />
                 <span onClick={() => handleDeleteTaskClick(index)}>
-                  <span className="material-symbols-outlined clickable">delete</span>
+                  <span className="material-symbols-outlined clickable">
+                    delete
+                  </span>
                 </span>
               </div>
             </div>
