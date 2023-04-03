@@ -73,7 +73,8 @@ function DisplayTasks({
                   {task.completed ? "task_alt" : "radio_button_unchecked"}
                 </span>
                 <input
-                className="task-input"
+                className="task-input clickable"
+                autoComplete="off"
                   type="text"
                   name="taskName"
                   value={task.name}

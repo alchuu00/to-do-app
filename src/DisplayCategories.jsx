@@ -12,15 +12,18 @@ function DisplayCategories({ categoryList, onDeleteCategory, onFilterByCategory,
   return (
     <>
       {categoryList.map((category, index) => (
-        <div className="sidebar-category" key={index} onClick={() => setSelectedCategory(category)}>
+        <div className="sidebar-category" key={index} 
+        onClick={() => {
+          setSelectedCategory(category),
+          handleFilterByCategoryClick(category)}}>
           <div className="sidebar-item">
-            <a href="#" onClick={() => handleFilterByCategoryClick(category)}>
+            <a href="#">
               <span className="material-symbols-outlined">list_alt</span>
               {category}
             </a>
           </div>
           <button onClick={() => handleDeleteCategoryClick(index)}>
-            <span className="material-symbols-outlined">delete</span>
+            <span className="material-symbols-outlined clickable">delete</span>
           </button>
         </div>
       ))}
