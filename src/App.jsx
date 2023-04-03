@@ -29,14 +29,6 @@ function App() {
     setTaskList((taskList) => taskList.filter((task, i) => i !== index));
   };
 
-  const handleAddCategory = (category) => {
-    setCategoryList([...categoryList, category]);
-  };
-
-  const handleFilterByCategory = (category) => {
-    setSelectedCategory(category);
-  };
-
   const handleDeleteCategory = (index) => {
     setCategoryList((categoryList) =>
       categoryList.filter((category, i) => i !== index)
@@ -114,21 +106,30 @@ function App() {
         <div className="sidebar">
           <div
             className="sidebar-item"
-            onClick={() => setSelectedFilter("All")}
+            onClick={() => {
+              setSelectedFilter("All");
+              setSelectedCategory("");
+            }}
           >
             <span className="material-symbols-outlined">ballot</span>
             <span>All</span>
           </div>
           <div
             className="sidebar-item"
-            onClick={() => setSelectedFilter("Today")}
+            onClick={() => {
+              setSelectedFilter("Today");
+              setSelectedCategory("");
+            }}
           >
             <span className="material-symbols-outlined">today</span>
             <span>Today</span>
           </div>
           <div
             className="sidebar-item"
-            onClick={() => setSelectedFilter("This Week")}
+            onClick={() => {
+              setSelectedFilter("This Week");
+              setSelectedCategory("");
+            }}
           >
             <span className="material-symbols-outlined">date_range</span>
             <span>This week</span>

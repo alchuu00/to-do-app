@@ -16,7 +16,7 @@ function TaskForm({ taskList, setTaskList, setShowTaskForm, selectedCategory }) 
         completed: false,
         name: taskName.trim(),
         date: taskDate.trim(),
-        category: selectedCategory || "",
+        category: selectedCategory ? selectedCategory : "",
       };
       setTaskList((taskList) => [...taskList, newTask]);
       setTaskName("");
