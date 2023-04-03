@@ -52,8 +52,8 @@
 .task-add {
   @apply flex justify-between items-center gap-3;
 }
-span {
-  @apply flex justify-between items-center;
+span, a {
+  @apply flex justify-between items-center gap-3;
 }
 .task-inner {
   @apply flex gap-3 w-full justify-between items-center;
