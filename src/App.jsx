@@ -66,7 +66,7 @@ function App() {
   }, [categoryList]);
 
   function onUpdateTaskCompletion(id) {
-    console.log("onUpdateTaskCompletition" + " " + id)
+    console.log("onUpdateTaskCompletition" + " " + id);
     setTaskList((prevTaskList) => {
       const updatedTaskList = [...prevTaskList];
       const index = updatedTaskList.findIndex((task) => task.id === id);
@@ -87,11 +87,11 @@ function App() {
       updatedList[index].name = newName;
       return updatedList;
     });
-  }  
+  }
 
   function onUpdateTaskDate(id, newDate) {
     setTaskList((prevList) => {
-            const index = prevList.findIndex((task) => task.id === id);
+      const index = prevList.findIndex((task) => task.id === id);
       const updatedList = [...prevList];
       updatedList[index].date = newDate;
       return updatedList;
@@ -174,8 +174,11 @@ function App() {
             selectedFilter={selectedFilter}
           />
           <div className="task-container">
-            {!showTaskForm && (
-              <div className="task-input clickable" onClick={handleAddTaskClick}>
+            {!showTaskForm && (selectedFilter === "All" || selectedFilter === selectedCategory) && (
+              <div
+                className="task-input clickable"
+                onClick={handleAddTaskClick}
+              >
                 <div>+</div>
                 <div>Add Task</div>
               </div>
