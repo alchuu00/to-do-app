@@ -3,35 +3,35 @@ import React from "react";
 function DisplayTasks({
   taskList,
   categoryList,
-  onDeleteTask,
+  handleDeleteTask,
   onUpdateTaskCompletion,
   onUpdateTaskDate,
   onUpdateTaskName,
   selectedFilter,
 }) {
-  const handleDeleteTaskClick = (index) => {
-    onDeleteTask(index);
+  const handleDeleteTaskClick = (id) => {
+    handleDeleteTask(id);
   };
 
-  const handleDateChange = (index, event) => {
-    onUpdateTaskDate(index, event.target.value);
+  const handleDateChange = (id, event) => {
+    onUpdateTaskDate(id, event.target.value);
   };
 
-  const handleTaskCompletionToggle = (index) => {
-    const taskDate = new Date(taskList[index].date).toDateString();
+  const handleTaskCompletionToggle = (id) => {
+    console.log("handleCompletitionToggle" + " " + id);
+    const task = taskList.find((task) => task.id === id);
+    const taskDate = new Date(task.date).toDateString();
     const todayDate = new Date().toDateString();
     if (taskDate === todayDate) {
-      onUpdateTaskCompletion(index);
+      onUpdateTaskCompletion(task.id);
     } else {
       alert("You cannot update task completion for a date other than today!");
     }
   };
 
-  const handleTaskNameChange = (index, newName) => {
-    onUpdateTaskName(index, newName);
+  const handleTaskNameChange = (id, newName) => {
+    onUpdateTaskName(id, newName);
   };
-
-  console.log(selectedFilter);
 
   let filteredTasks = taskList;
   if (selectedFilter === "Today") {
@@ -62,24 +62,24 @@ function DisplayTasks({
       {filteredTasks.length === 0 ? (
         <p>No tasks to show</p>
       ) : (
-        filteredTasks.map((task, index) => (
-          <div className="task-container" key={index}>
+        filteredTasks.map((task) => (
+          <div className="task-container" key={task.id}>
             <div className="task-inner">
               <div className="task-add">
                 <span
                   className="material-symbols-outlined clickable"
-                  onClick={() => handleTaskCompletionToggle(index)}
+                  onClick={() => handleTaskCompletionToggle(task.id)}
                 >
                   {task.completed ? "task_alt" : "radio_button_unchecked"}
                 </span>
                 <input
-                className="task-input clickable"
-                autoComplete="off"
+                  className="task-input clickable"
+                  autoComplete="off"
                   type="text"
                   name="taskName"
                   value={task.name}
                   onChange={(event) =>
-                    handleTaskNameChange(index, event.target.value)
+                    handleTaskNameChange(task.id, event.target.value)
                   }
                 />
               </div>
@@ -89,9 +89,9 @@ function DisplayTasks({
                   type="date"
                   name="date"
                   value={task.date}
-                  onChange={(event) => handleDateChange(index, event)}
+                  onChange={(event) => handleDateChange(task.id, event)}
                 />
-                <span onClick={() => handleDeleteTaskClick(index)}>
+                <span onClick={() => handleDeleteTaskClick(task.id)}>
                   <span className="material-symbols-outlined clickable">
                     delete
                   </span>

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { v4 as uuidv4 } from 'uuid';
 
 function TaskForm({ taskList, setTaskList, setShowTaskForm, selectedCategory }) {
   const [taskName, setTaskName] = useState("");
@@ -13,6 +14,7 @@ function TaskForm({ taskList, setTaskList, setShowTaskForm, selectedCategory }) 
     event.stopPropagation();
     if (taskName.trim() !== "") {
       const newTask = {
+        id: uuidv4(),
         completed: false,
         name: taskName.trim(),
         date: taskDate.trim(),

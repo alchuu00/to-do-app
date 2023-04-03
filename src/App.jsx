@@ -25,8 +25,8 @@ function App() {
     setShowCategoryForm(true);
   };
 
-  const handleDeleteTask = (index) => {
-    setTaskList((taskList) => taskList.filter((task, i) => i !== index));
+  const handleDeleteTask = (id) => {
+    setTaskList((taskList) => taskList.filter((task) => task.id !== id));
   };
 
   const handleDeleteCategory = (index) => {
@@ -65,27 +65,33 @@ function App() {
     }
   }, [categoryList]);
 
-  function onUpdateTaskCompletion(index) {
+  function onUpdateTaskCompletion(id) {
+    console.log("onUpdateTaskCompletition" + " " + id)
     setTaskList((prevTaskList) => {
       const updatedTaskList = [...prevTaskList];
-      updatedTaskList[index] = {
-        ...updatedTaskList[index],
-        completed: !updatedTaskList[index].completed,
-      };
+      const index = updatedTaskList.findIndex((task) => task.id === id);
+      if (index >= 0) {
+        updatedTaskList[index] = {
+          ...updatedTaskList[index],
+          completed: !updatedTaskList[index].completed,
+        };
+      }
       return updatedTaskList;
     });
   }
 
-  function onUpdateTaskName(index, newName) {
+  function onUpdateTaskName(id, newName) {
     setTaskList((prevList) => {
+      const index = prevList.findIndex((task) => task.id === id);
       const updatedList = [...prevList];
       updatedList[index].name = newName;
       return updatedList;
     });
   }  
 
-  function onUpdateTaskDate(index, newDate) {
+  function onUpdateTaskDate(id, newDate) {
     setTaskList((prevList) => {
+            const index = prevList.findIndex((task) => task.id === id);
       const updatedList = [...prevList];
       updatedList[index].date = newDate;
       return updatedList;
@@ -161,7 +167,7 @@ function App() {
           <DisplayTasks
             taskList={taskList}
             categoryList={categoryList}
-            onDeleteTask={handleDeleteTask}
+            handleDeleteTask={handleDeleteTask}
             onUpdateTaskCompletion={onUpdateTaskCompletion}
             onUpdateTaskDate={onUpdateTaskDate}
             onUpdateTaskName={onUpdateTaskName}
