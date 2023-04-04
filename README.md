@@ -1,3 +1,3 @@
 # to-do-app
 
-https://alchuu00.github.io/to-do-app/
+https://gentle-elf-69e434.netlify.app
