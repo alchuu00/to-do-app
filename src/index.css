@@ -79,11 +79,3 @@ span, a {
 .task-cancel-btn {
   @apply w-1/2 bg-red-100;
 }
-
-/*FOOTER*/
-.footer {
-  @apply flex justify-center items-center bg-zinc-700 text-white gap-3 p-7 h-10;
-}
-svg:hover {
-  @apply animate-spin;
-}

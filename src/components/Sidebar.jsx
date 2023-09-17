@@ -1,25 +1,34 @@
-import CategoryForm from "./CategoryForm";
-import DisplayCategories from "./DisplayCategories";
+import React from 'react';
+import CategoryForm from './CategoryForm';
+import DisplayCategories from './DisplayCategories';
 
-export function Sidebar({
-  setSelectedFilter,
-  setSelectedCategory,
-  selectedCategory,
-  categoryList,
-  handleDeleteCategory,
-  onFilterByCategory,
-  showCategoryForm,
-  handleAddCategoryClick,
-  setCategoryList,
-  setShowCategoryForm,
-}) {
+function Sidebar() {
+  const [showCategoryForm, setShowCategoryForm] = useAtom(showCategoryFormAtom);
+  const [categoryList, setCategoryList] = useAtom(categoryListAtom);
+  const [_selectedFilter, setSelectedFilter] = useAtom(selectedFilterAtom);
+  const [_selectedCategory, setSelectedCategory] = useAtom(selectedCategoryAtom);
+
+  const handleAddCategoryClick = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    setShowCategoryForm(true);
+  };
+
+  const handleDeleteCategory = (index) => {
+    setCategoryList((categoryList) => categoryList.filter((category, i) => i !== index));
+  };
+
+  function onFilterByCategory(categoryName) {
+    setSelectedFilter(categoryName);
+  }
+
   return (
     <div className="sidebar">
       <div
         className="sidebar-item"
         onClick={() => {
-          setSelectedFilter("All");
-          setSelectedCategory("");
+          setSelectedFilter('All');
+          setSelectedCategory('');
         }}
       >
         <span className="material-symbols-outlined">ballot</span>
@@ -28,8 +37,8 @@ export function Sidebar({
       <div
         className="sidebar-item"
         onClick={() => {
-          setSelectedFilter("Today");
-          setSelectedCategory("");
+          setSelectedFilter('Today');
+          setSelectedCategory('');
         }}
       >
         <span className="material-symbols-outlined">today</span>
@@ -38,8 +47,8 @@ export function Sidebar({
       <div
         className="sidebar-item"
         onClick={() => {
-          setSelectedFilter("This Week");
-          setSelectedCategory("");
+          setSelectedFilter('This Week');
+          setSelectedCategory('');
         }}
       >
         <span className="material-symbols-outlined">date_range</span>
@@ -69,3 +78,5 @@ export function Sidebar({
     </div>
   );
 }
+
+export default Sidebar;

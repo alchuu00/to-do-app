@@ -1,9 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
-function TaskForm({ taskList, setTaskList, setShowTaskForm, selectedCategory }) {
-  const [taskName, setTaskName] = useState("");
-  const [taskDate, setTaskDate] = useState("");
+function TaskForm({
+  taskList,
+  setTaskList,
+  setShowTaskForm,
+  selectedCategory,
+}) {
+  const [taskName, setTaskName] = useState('');
+  const [taskDate, setTaskDate] = useState('');
 
   const handleCancelTaskClick = () => {
     setShowTaskForm(false);
@@ -12,17 +17,17 @@ function TaskForm({ taskList, setTaskList, setShowTaskForm, selectedCategory }) 
   const handleFormSubmit = (event) => {
     event.preventDefault();
     event.stopPropagation();
-    if (taskName.trim() !== "") {
+    if (taskName.trim() !== '') {
       const newTask = {
         id: uuidv4(),
         completed: false,
         name: taskName.trim(),
         date: taskDate.trim(),
-        category: selectedCategory ? selectedCategory : "",
+        category: selectedCategory || '',
       };
       setTaskList((taskList) => [...taskList, newTask]);
-      setTaskName("");
-      setTaskDate("");
+      setTaskName('');
+      setTaskDate('');
       setShowTaskForm(false);
     }
   };
